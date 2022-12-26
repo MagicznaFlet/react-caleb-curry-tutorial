@@ -7,6 +7,7 @@ import './index.css'
 import Employees from './pages/Employees';
 import Header from './components/Header'
 import Customers from './pages/Customers';
+import Dictionary from './components/Dictionary';
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
       <Header>
         <Routes>
           <Route path='/'></Route>
-          <Route path='/Employees' element={<Employees />} />
-          <Route path='Customers' element={<Customers />} />
+          <Route path='/employees' element={<Employees />} />
+          <Route path='/customers' element={<Customers />} />
+          <Route path='/dictionary' element={<Dictionary />} />
         </Routes>
       </Header >
     </BrowserRouter>
