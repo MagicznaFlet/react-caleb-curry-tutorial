@@ -4,7 +4,6 @@ import '../index.css'
 import Employee from '../Employee';
 import AddEmployee from '../components/AddEmployee';
 import EditEmployee from '../components/EditEmployee';
-import Header from '../components/Header'
 
 function Employees() {
     const [employees, setEmployees] = useState(
@@ -69,8 +68,7 @@ function Employees() {
     }
 
     return (
-        <div className='App bg-gray-200'>
-            <Header />
+        <div className='bg-gray-200'>
             <div className='flex flex-wrap justify-center'>
                 {employees.map(data => {
                     const editEmployee = (

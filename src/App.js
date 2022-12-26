@@ -1,19 +1,24 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
 import './index.css'
-import Employee from './Employee';
-import AddEmployee from './components/AddEmployee';
 import Employees from './pages/Employees';
-import EditEmployee from './components/EditEmployee';
 import Header from './components/Header'
+import Customers from './pages/Customers';
 
 function App() {
   return (
-    <Header>
-      <Employees />
-    </Header>
+    <BrowserRouter>
+      <Header>
+        <Routes>
+          <Route path='/'></Route>
+          <Route path='/Employees' element={<Employees />} />
+          <Route path='Customers' element={<Customers />} />
+        </Routes>
+      </Header >
+    </BrowserRouter>
   );
 }
 
