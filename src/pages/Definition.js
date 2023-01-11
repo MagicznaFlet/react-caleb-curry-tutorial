@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
 
 import NotFound from './404';
+import DefinitionSearch from '../components/DefinitionSearch';
 
 export default function Definition() {
     const [word, setWord] = useState({});
@@ -66,7 +67,10 @@ export default function Definition() {
                 <p>Name: <span>{word.word}</span></p>
                 {meanings.map((meaning) => {
                     return <p key={uuidv4()}>{meaning.partOfSpeech} </p>
-                })}</>
+                })}
+                <p>Search again</p>
+                <DefinitionSearch />
+            </>
             : null}
         </>
     )
