@@ -21,20 +21,40 @@ export default function Customer() {
                 return response.json();
             })
             .then((data) => {
-                console.log(data.customers)
-                setCustomer(data.customers)
+                console.log(Object(data.customer))
+                setCustomer(Object(data.customer))
             })
     }, []);
+
     return (
         <>
             {notFound ? <NotFound /> : null}
-            {customer ? (
+            {customer ?
                 <div>
-                    <p>{customer.id}</p>
-                    <p>{customer.name}</p>
-                    <p>{customer.industry}</p>
+                    <p>ID: {customer.id}</p>
+                    <p>Name: {customer.name}</p>
+                    <p>Industry: {customer.industry}</p>
                 </div>
-            ) : null}
+                : null}
+            <button onClick={(e) => {
+                const url = baseUrl + 'api/customers/' + id;
+                fetch(url, {
+                    method: 'DELETE', headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error('Something went wrong');
+                        }
+                        navigate('/customers/')
+                    })
+                    .catch((e) => {
+                        console.log(e)
+                        navigate('/404/')
+                    })
+            }}>DELETE</button>
+            <br></br>
             <Link to="/customers/">Go back</Link>
         </>
     )
