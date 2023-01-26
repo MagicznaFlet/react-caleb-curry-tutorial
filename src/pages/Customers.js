@@ -4,18 +4,20 @@ import AddCustomer from "../components/AddCustomer";
 import { baseUrl } from '../shared';
 
 export default function Customers() {
-
-    const [customers, setCustomers] = useState([{}])
+    const [customers, setCustomers] = useState([])
+    const [show, setShow] = useState(false);
     useEffect(() => {
-        console.log("Feching...");
         const url = baseUrl + "api/customers/";
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 setCustomers(data.customers)
             })
     }, [])
+
+    function toggleShow() {
+        setShow(!show);
+    }
 
     function newCustomer(name, industry) {
         const data = { name: name, industry: industry };
@@ -28,12 +30,14 @@ export default function Customers() {
             body: JSON.stringify(data)
         })
             .then((response) => {
-                if (!response) {
+                if (!response.ok) {
                     throw new Error('Something went wrong');
                 }
+                return response.json();
             })
             .then((data) => {
-
+                toggleShow();
+                setCustomers([...customers, data.customer]);
             })
             .catch((e) => {
                 console.log(e);
@@ -51,12 +55,11 @@ export default function Customers() {
                                 <Link to={"/customers/" + customer.id}>{customer.name}</Link>
                             </li>
                         )
-
                     })
                     : null
                 }
             </ul>
-            <AddCustomer newCustomer={newCustomer} />
+            <AddCustomer newCustomer={newCustomer} show={show} toggleShow={toggleShow} />
         </>
     );
 }

@@ -10,7 +10,6 @@ export default function Customer() {
     const [customer, setCustomer] = useState({});
     const [notFound, setNotFound] = useState(false);
     useEffect(() => {
-        console.log('useEffect')
         const url = baseUrl + 'api/customers/' + id;
         fetch(url)
             .then((response) => {
@@ -21,7 +20,6 @@ export default function Customer() {
                 return response.json();
             })
             .then((data) => {
-                console.log(Object(data.customer))
                 setCustomer(Object(data.customer))
             })
     }, []);

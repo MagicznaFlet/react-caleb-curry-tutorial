@@ -5,7 +5,7 @@ export default function AddCustomer(props) {
     const [name, setName] = useState('');
     const [industry, setIndustry] = useState('');
 
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(props.show);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -13,13 +13,13 @@ export default function AddCustomer(props) {
     return (
         <>
             < button
-                onClick={handleShow} className="mb-2 px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2" >
+                onClick={props.toggleShow} className="mb-2 px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2" >
                 + Add Customer
             </button >
 
             <Modal
-                show={show}
-                onHide={handleClose}
+                show={props.show}
+                onHide={props.toggleShow}
                 backdrop="static"
                 keyboard={false}
             >
@@ -75,15 +75,13 @@ export default function AddCustomer(props) {
                 <Modal.Footer>
                     <button
                         className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={handleClose}
+                        onClick={props.toggleShow}
                     >
                         Back
                     </button>
                     <button
-
                         className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
                         form='editmodal'
-                        onClick={handleShow}
                     >
                         Add
                     </button>
